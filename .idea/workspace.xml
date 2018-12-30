@@ -26,7 +26,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f30bf1b6-2269-46d7-aadf-dc00ee1fb4a9" name="Default" comment="Changed font size of primary text">
+    <list default="true" id="f30bf1b6-2269-46d7-aadf-dc00ee1fb4a9" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.6/taskHistory/taskHistory.bin" afterDir="false" />
@@ -62,12 +62,14 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="37" column="31" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
+            <state relative-caret-position="446">
+              <caret line="35" column="42" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="42" />
               <folding>
                 <element signature="e#601#623#0" expanded="true" />
-                <element signature="e#1072#1097#0" expanded="true" />
-                <element signature="e#2991#3018#0" expanded="true" />
+                <element signature="e#907#932#0" expanded="true" />
+                <element signature="e#3109#3136#0" expanded="true" />
+                <element signature="e#3269#3296#0" expanded="true" />
+                <element signature="e#3460#3486#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2619,7 +2621,7 @@
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.recentlyUsedThemes" value="Theme.AppCompat.Light.NoActionBar" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
-    <property name="device.picker.selection" value="ce10171afd73ea2704" />
+    <property name="device.picker.selection" value="ce031713f52b7c6d0d" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Java" />
   </component>
   <component name="RecentsManager">
@@ -2757,7 +2759,14 @@
       <option name="project" value="LOCAL" />
       <updated>1546189443498</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Changed font size and weight of primary text">
+      <created>1546207088295</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1546207088295</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2803,7 +2812,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="New files added by android studio" />
-    <option name="LAST_COMMIT_MESSAGE" value="New files added by android studio" />
+    <MESSAGE value="Changed font size and weight of primary text" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed font size and weight of primary text" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/build/generated/not_namespaced_r_class_sources/debug/processDebugResources/r/android/arch/core/R.java">
@@ -3098,12 +3108,14 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="37" column="31" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
+        <state relative-caret-position="446">
+          <caret line="35" column="42" selection-start-line="35" selection-start-column="42" selection-end-line="35" selection-end-column="42" />
           <folding>
             <element signature="e#601#623#0" expanded="true" />
-            <element signature="e#1072#1097#0" expanded="true" />
-            <element signature="e#2991#3018#0" expanded="true" />
+            <element signature="e#907#932#0" expanded="true" />
+            <element signature="e#3109#3136#0" expanded="true" />
+            <element signature="e#3269#3296#0" expanded="true" />
+            <element signature="e#3460#3486#0" expanded="true" />
           </folding>
         </state>
       </provider>

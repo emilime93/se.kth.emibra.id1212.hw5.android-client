@@ -33,7 +33,7 @@
         android:id="@+id/progressView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="please type 'start'"
+        android:text="press start to begin"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/guessInput"
