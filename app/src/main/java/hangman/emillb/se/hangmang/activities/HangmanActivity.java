@@ -3,14 +3,19 @@ package hangman.emillb.se.hangmang.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.net.InetSocketAddress;
+
 import hangman.emillb.se.hangmang.R;
 import hangman.emillb.se.hangmang.model.GameActionFeedback;
+import hangman.emillb.se.hangmang.model.HostTouple;
 import hangman.emillb.se.hangmang.net.NetworkCallback;
 import hangman.emillb.se.hangmang.net.ServerHandler;
 
@@ -31,9 +36,10 @@ public class HangmanActivity extends AppCompatActivity implements NetworkCallbac
     private EditText mGuessInput;
 
     private boolean mGameOngoing = false;
+
     private boolean mConnectedToServer = false;
 
-    private ServerHandler mServerHandler = new ServerHandler("192.168.0.3", 4455, this);
+    private ServerHandler mServerHandler = new ServerHandler("192.168.0.5", 4455, this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +90,38 @@ public class HangmanActivity extends AppCompatActivity implements NetworkCallbac
                     mServerHandler.connect();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.settings_action:
+                openSettings();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void openSettings() {
+        new SettingsDialog(HangmanActivity.this, new SettingsDialog.InputSenderDialogListener() {
+            @Override
+            public void onOK(final HostTouple host) {
+                mServerHandler.setHostname(host.getHostname());
+                mServerHandler.setPort(host.getPort());
+            }
+
+            @Override
+            public void onCancel() {
+                Log.d(DEBUG_TAG, "Dialog canceled");
+            }
+        }).setHostname(mServerHandler.getHostname()).setPort(mServerHandler.getPort()).show();
     }
 
     private void clearUI(final boolean fullClear) {

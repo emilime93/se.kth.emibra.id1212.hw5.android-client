@@ -18,16 +18,32 @@ public class ServerHandler {
     private BufferedWriter mWriter;
     private BufferedReader mReader;
 
-    private final String remoteHost;
-    private final int remotePort;
+    private String mHostname;
+    private int mPort;
     private boolean mConnected = false;
 
     private NetworkCallback mCallback;
 
     public ServerHandler(String host, int port, NetworkCallback callback) {
-        this.remoteHost = host;
-        this.remotePort = port;
+        this.mHostname = host;
+        this.mPort = port;
         this.mCallback = callback;
+    }
+
+    public String getHostname() {
+        return mHostname;
+    }
+
+    public void setHostname(String hostname) {
+        mHostname = hostname;
+    }
+
+    public int getPort() {
+        return mPort;
+    }
+
+    public void setPort(int port) {
+        mPort = port;
     }
 
     public void connect() {
@@ -36,14 +52,15 @@ public class ServerHandler {
             public void run() {
                 try {
                     mSocket = new Socket();
-                    mSocket.connect(new InetSocketAddress(remoteHost, remotePort));
+                    mSocket.connect(new InetSocketAddress(mHostname, mPort));
                     mWriter = new BufferedWriter(new OutputStreamWriter(mSocket.getOutputStream()));
                     mReader = new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
                     new Thread(new ServerListener()).start();
                     mConnected = true;
                     mCallback.notifyConnected();
-                    Log.d(DEBUG_TAG, "Connected");
+                    Log.d(DEBUG_TAG, "Connected to " + mSocket);
                 } catch (IOException e) {
+                    disconnect();
                     e.printStackTrace();
                 }
             }
@@ -103,10 +120,11 @@ public class ServerHandler {
             mSocket.close();
             mWriter.close();
             mConnected = false;
-            mCallback.notifyDisconnected();
             Log.d(DEBUG_TAG, "Disconnected");
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             e.printStackTrace();
+        } finally {
+            mCallback.notifyDisconnected();
         }
     }
 

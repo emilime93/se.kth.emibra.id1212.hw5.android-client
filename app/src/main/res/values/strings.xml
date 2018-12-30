@@ -11,5 +11,10 @@
     <string name="score_prefix">Score: </string>
     <string name="secret_prefix">The word was: </string>
     <string name="guessed_prefix">Guessed: </string>
+    <string name="settings">Settings</string>
+
+    <string name="settings_hostname">Hostname</string>
+    <string name="settings_port">Port</string>
+    <string name="settings_title">Set remote host</string>
 
 </resources>
