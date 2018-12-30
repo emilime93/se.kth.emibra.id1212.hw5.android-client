@@ -33,7 +33,7 @@ public class HangmanActivity extends AppCompatActivity implements NetworkCallbac
     private boolean mGameOngoing = false;
     private boolean mConnectedToServer = false;
 
-    private ServerHandler mServerHandler = new ServerHandler("192.168.0.5", 4455, this);
+    private ServerHandler mServerHandler = new ServerHandler("192.168.0.3", 4455, this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
