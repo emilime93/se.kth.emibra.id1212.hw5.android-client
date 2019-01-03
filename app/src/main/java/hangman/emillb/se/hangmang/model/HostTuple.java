@@ -1,10 +1,10 @@
 package hangman.emillb.se.hangmang.model;
 
-public class HostTouple {
+public class HostTuple {
     private String mHostname;
     private int mPort;
 
-    public HostTouple(String hostname, int port) {
+    public HostTuple(String hostname, int port) {
         mHostname = hostname;
         mPort = port;
     }

@@ -11,11 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.net.InetSocketAddress;
-
 import hangman.emillb.se.hangmang.R;
 import hangman.emillb.se.hangmang.model.GameActionFeedback;
-import hangman.emillb.se.hangmang.model.HostTouple;
+import hangman.emillb.se.hangmang.model.HostTuple;
 import hangman.emillb.se.hangmang.net.NetworkCallback;
 import hangman.emillb.se.hangmang.net.ServerHandler;
 
@@ -112,7 +110,7 @@ public class HangmanActivity extends AppCompatActivity implements NetworkCallbac
     private void openSettings() {
         new SettingsDialog(HangmanActivity.this, new SettingsDialog.InputSenderDialogListener() {
             @Override
-            public void onOK(final HostTouple host) {
+            public void onOK(final HostTuple host) {
                 mServerHandler.setHostname(host.getHostname());
                 mServerHandler.setPort(host.getPort());
             }

@@ -10,15 +10,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 
-import java.net.InetSocketAddress;
-
 import hangman.emillb.se.hangmang.R;
-import hangman.emillb.se.hangmang.model.HostTouple;
+import hangman.emillb.se.hangmang.model.HostTuple;
 
 public class SettingsDialog extends AlertDialog.Builder {
 
     public interface InputSenderDialogListener{
-        void onOK(HostTouple host);
+        void onOK(HostTuple host);
         void onCancel();
     }
 
@@ -40,7 +38,7 @@ public class SettingsDialog extends AlertDialog.Builder {
                 if(listener != null) {
                     String host = String.valueOf(mHostnameEdit.getText());
                     int port = Integer.parseInt(String.valueOf(mPortEdit.getText()));
-                    listener.onOK(new HostTouple(host, port));
+                    listener.onOK(new HostTuple(host, port));
                 }
 
             }

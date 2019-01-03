@@ -33,8 +33,8 @@
         android:id="@+id/progressView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="press start to begin"
-        android:textSize="20dp"
+        android:text="@string/start_screen_prompt"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/guessInput"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -46,7 +46,7 @@
         android:id="@+id/scoreView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Score: "
+        android:text="@string/score_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Score: 3" />
@@ -55,7 +55,7 @@
         android:id="@+id/remainingGuessesView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Remaining guesses:"
+        android:text="@string/remaining_guesses_label"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Remaining guesses: 5" />
