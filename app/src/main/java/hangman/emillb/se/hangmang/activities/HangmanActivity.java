@@ -19,7 +19,7 @@ import hangman.emillb.se.hangmang.net.ServerHandler;
 
 public class HangmanActivity extends AppCompatActivity implements NetworkCallback {
 
-    public final static String DEBUG_TAG = "HANGMAN_DEBUG";
+    private final static String TAG = ServerHandler.class.getSimpleName();
 
     private Button mGuessButton;
     private Button mStartGameButton;
@@ -43,9 +43,6 @@ public class HangmanActivity extends AppCompatActivity implements NetworkCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Hope this works
-        mServerHandler.connect();
-
         setContentView(R.layout.hangman_activity_main);
 
         mGuessButton = findViewById(R.id.guessButton);
@@ -57,6 +54,9 @@ public class HangmanActivity extends AppCompatActivity implements NetworkCallbac
         mStartGameButton = findViewById(R.id.startGameButton);
         mQuitButton = findViewById(R.id.quitButton);
         mGuessedView = findViewById(R.id.guessedView);
+
+        setGameInteractionEnabled(false);
+        mServerHandler.connect();
 
         mGuessButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,10 +70,10 @@ public class HangmanActivity extends AppCompatActivity implements NetworkCallbac
             public void onClick(View v) {
                 mSecretWordView.setText(null);
                 if (mGameOngoing) {
-                    Log.d(DEBUG_TAG, "Trying to restart game");
+                    Log.d(TAG, "Trying to restart game");
                     mServerHandler.restartGame();
                 } else {
-                    Log.d(DEBUG_TAG, "Trying to START game");
+                    Log.d(TAG, "Trying to START game");
                     mServerHandler.startGame();
                 }
             }
@@ -117,7 +117,7 @@ public class HangmanActivity extends AppCompatActivity implements NetworkCallbac
 
             @Override
             public void onCancel() {
-                Log.d(DEBUG_TAG, "Dialog canceled");
+                Log.d(TAG, "Dialog canceled");
             }
         }).setHostname(mServerHandler.getHostname()).setPort(mServerHandler.getPort()).show();
     }
@@ -193,11 +193,15 @@ public class HangmanActivity extends AppCompatActivity implements NetworkCallbac
             public void run() {
                 mConnectedToServer = true;
                 mQuitButton.setText(R.string.quit_game_button);
-                mGuessButton.setEnabled(true);
-                mStartGameButton.setEnabled(true);
+                setGameInteractionEnabled(true);
                 Toast.makeText(HangmanActivity.this, "Connected to server", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void setGameInteractionEnabled(boolean enabled) {
+        mGuessButton.setEnabled(enabled);
+        mStartGameButton.setEnabled(enabled);
     }
 
     @Override
@@ -206,8 +210,7 @@ public class HangmanActivity extends AppCompatActivity implements NetworkCallbac
             @Override
             public void run() {
                 mConnectedToServer = false;
-                mGuessButton.setEnabled(false);
-                mStartGameButton.setEnabled(false);
+                setGameInteractionEnabled(false);
                 mQuitButton.setText(R.string.reconnect_game_button);
                 Toast.makeText(HangmanActivity.this, "Disconnected from server", Toast.LENGTH_SHORT).show();
             }

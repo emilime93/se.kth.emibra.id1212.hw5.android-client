@@ -10,9 +10,9 @@ import java.io.OutputStreamWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-import static hangman.emillb.se.hangmang.activities.HangmanActivity.DEBUG_TAG;
-
 public class ServerHandler {
+
+    private final static String TAG = ServerHandler.class.getSimpleName();
 
     private Socket mSocket;
     private BufferedWriter mWriter;
@@ -21,6 +21,8 @@ public class ServerHandler {
     private String mHostname;
     private int mPort;
     private boolean mConnected = false;
+    private volatile boolean mConnecting = false;
+    private final static int CONNECTION_TIMEOUT = 2000;
 
     private NetworkCallback mCallback;
 
@@ -47,21 +49,36 @@ public class ServerHandler {
     }
 
     public void connect() {
+        synchronized (this) {
+            if (mConnecting) {
+                return;
+            }
+        }
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
+                    synchronized (this) {
+                        mConnecting = true;
+                    }
                     mSocket = new Socket();
-                    mSocket.connect(new InetSocketAddress(mHostname, mPort));
+                    Log.d(TAG, "Trying to connect..");
+                    mSocket.connect(new InetSocketAddress(mHostname, mPort), CONNECTION_TIMEOUT);
+                    Log.d(TAG, "Connected.");
                     mWriter = new BufferedWriter(new OutputStreamWriter(mSocket.getOutputStream()));
                     mReader = new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
                     new Thread(new ServerListener()).start();
                     mConnected = true;
                     mCallback.notifyConnected();
-                    Log.d(DEBUG_TAG, "Connected to " + mSocket);
+                    Log.d(TAG, "Connected to " + mSocket);
                 } catch (IOException e) {
                     disconnect();
+                    Log.d(TAG, "Failed to connect");
                     e.printStackTrace();
+                } finally {
+                    synchronized (this) {
+                        mConnecting = false;
+                    }
                 }
             }
         }).start();
@@ -73,6 +90,7 @@ public class ServerHandler {
 
     public void quitGame() {
         sendCommand("exit");
+        disconnect();
     }
 
     public void restartGame() {
@@ -102,7 +120,7 @@ public class ServerHandler {
                     public void run() {
                         try {
                             mWriter.write(message + "\n");
-                            Log.d(DEBUG_TAG, "Sending:" + message);
+                            Log.d(TAG, "Sending:" + message);
                             mWriter.flush();
                             mCallback.messageSent();
                         } catch (IOException e) {
@@ -115,12 +133,12 @@ public class ServerHandler {
         new MessageSender(message).send();
     }
 
-    public void disconnect() {
+    private void disconnect() {
         try {
             mSocket.close();
             mWriter.close();
             mConnected = false;
-            Log.d(DEBUG_TAG, "Disconnected");
+            Log.d(TAG, "Disconnected");
         } catch (IOException | NullPointerException e) {
             e.printStackTrace();
         } finally {
@@ -132,17 +150,17 @@ public class ServerHandler {
 
         @Override
         public void run() {
-            Log.d(DEBUG_TAG, "Server Listener started");
+            Log.d(TAG, "Server Listener started");
             while(mConnected) {
                 try {
                     String received = mReader.readLine();
                     if (received == null) {
-                        Log.d(DEBUG_TAG, "NULL RECEIVED, QUITTING");
+                        Log.d(TAG, "NULL RECEIVED, QUITTING");
                         disconnect();
                         return;
                     }
                     mCallback.messageReceived(received);
-                    Log.d(DEBUG_TAG,"Server snooped up something");
+                    Log.d(TAG,"Server snooped up something");
                 } catch (IOException e) {
                     e.printStackTrace();
                     disconnect();
