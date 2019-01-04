@@ -211,6 +211,7 @@ public class HangmanActivity extends AppCompatActivity implements NetworkCallbac
                 mConnectedToServer = false;
                 setGameInteractionEnabled(false);
                 mQuitButton.setText(R.string.reconnect_game_button);
+                clearUI(true);
                 Toast.makeText(HangmanActivity.this, "Disconnected from server", Toast.LENGTH_SHORT).show();
             }
         });
