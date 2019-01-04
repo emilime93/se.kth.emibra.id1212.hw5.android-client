@@ -1,4 +1,4 @@
-package hangman.emillb.se.hangmang.activities;
+package hangman.emillb.se.hangmang;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,7 +10,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 
-import hangman.emillb.se.hangmang.R;
 import hangman.emillb.se.hangmang.model.HostTuple;
 
 public class SettingsDialog extends AlertDialog.Builder {
@@ -32,7 +31,7 @@ public class SettingsDialog extends AlertDialog.Builder {
         mHostnameEdit = dialogLayout.findViewById(R.id.hostnameEdit);
         mPortEdit = dialogLayout.findViewById(R.id.portEdit);
 
-        setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 if(listener != null) {

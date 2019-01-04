@@ -1,4 +1,4 @@
-package hangman.emillb.se.hangmang.activities;
+package hangman.emillb.se.hangmang;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import hangman.emillb.se.hangmang.R;
 import hangman.emillb.se.hangmang.model.GameActionFeedback;
 import hangman.emillb.se.hangmang.model.HostTuple;
 import hangman.emillb.se.hangmang.net.NetworkCallback;
